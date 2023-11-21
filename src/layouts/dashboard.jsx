@@ -9,6 +9,7 @@ import {
 } from "@/widgets/layout";
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
+import { PlayerByTeam } from "@/pages/dashboard/PlayerByTeam";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -39,9 +40,11 @@ export function Dashboard() {
             ({ layout, pages }) =>
               layout === "dashboard" &&
               pages.map(({ path, element }) => (
-                <Route exact path={path} element={element} />
+                <Route exact path={path}  element={element} />
               ))
           )}
+          <Route exact path={"/joueurs/:idequipe"} element={<PlayerByTeam />} />
+
         </Routes>
         <div className="text-blue-gray-600">
           <Footer />
