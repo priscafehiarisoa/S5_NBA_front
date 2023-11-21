@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   Card,
   CardHeader,
@@ -5,13 +6,16 @@ import {
   Typography,
   Avatar,
   Chip,
-  Tooltip, 
+  Tooltip,
   Progress,
 } from "@material-tailwind/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import { authorsTableData, projectsTableData } from "@/data";
 
-export function Tables() {
+
+
+
+export const Player = () => {
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
@@ -215,7 +219,6 @@ export function Tables() {
         </CardBody>
       </Card>
     </div>
-  );
+  )
 }
 
-export default Tables;
