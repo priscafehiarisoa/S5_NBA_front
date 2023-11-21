@@ -10,6 +10,7 @@ import {
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 import { PlayerByTeam } from "@/pages/dashboard/PlayerByTeam";
+import { ActionByPlayer } from "@/pages/dashboard/ActionByPlayer";
 
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -44,7 +45,7 @@ export function Dashboard() {
               ))
           )}
           <Route exact path={"/joueurs/:idequipe"} element={<PlayerByTeam />} />
-
+          <Route exact path={"/joueurs/action/:idjoueur"} element={<ActionByPlayer />} />
         </Routes>
         <div className="text-blue-gray-600">
           <Footer />

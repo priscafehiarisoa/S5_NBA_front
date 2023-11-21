@@ -14,6 +14,7 @@ import { authorsTableData, projectsTableData } from "@/data";
 import {useState, useEffect} from "react";
 import backendConfig from '@/configs/config';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 export const Player = () => {
   const [joueurs, setJoueurs] = useState([]);
@@ -50,7 +51,7 @@ export const Player = () => {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["Nom", "Poste", "Equipe"].map((el) => (
+                {["Nom", "Poste", "Equipe",""].map((el) => (
                   <th
                     key={el}
                     className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -101,7 +102,19 @@ export const Player = () => {
                           {joueur.equipe.nomEquipe}
                         </Typography>
                       </td>
+                      <td className={className}>
+                        <Link
+                          to={`/dashboard/joueurs/action/${joueur.id}`}
+                        >
+                        <Chip
 
+                          variant="gradient"
+                          color={"blue"}
+                          value={"Info"}
+                          className="py-0.5 px-2 text-[11px] font-medium w-fit"
+                        />
+                        </Link>
+                      </td>
                     </tr>
                   );
                 }

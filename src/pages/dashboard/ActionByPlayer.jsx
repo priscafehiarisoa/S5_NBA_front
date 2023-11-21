@@ -13,24 +13,21 @@ import { authorsTableData, projectsTableData } from "@/data";
 import {useState, useEffect} from "react";
 import backendConfig from '@/configs/config';
 import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-
-export const PlayerByTeam = () => {
-    const [joueurs, setJoueurs] = useState([]);
-    let {idequipe}=useParams();
+export const ActionByPlayer = () => {
+    const [actions, setActions] = useState([]);
+    let {idjoueur}=useParams();
     const link = `http://${backendConfig.host}:${backendConfig.port}`;
     useEffect(() => {
       const fetchData = async () => {
         try {
 
-          const response = await axios.get(link+"/Joueur/"+idequipe);
+          const response = await axios.get(link+"/action/"+idjoueur);
 
-          console.log(link+"/Joueur/AllJouer/")
+        //   console.log(link+"/Joueur/AllJouer/")
           // console.log(response.data);
-          setJoueurs(response.data);
-          console.log(joueurs)
-          console.log(idequipe)
+          setActions(response.data);
           // Handle the response data
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -47,14 +44,14 @@ export const PlayerByTeam = () => {
         <Card>
           <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
             <Typography variant="h6" color="white">
-              Liste des joueurs
+              Liste des actions
             </Typography>
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Nom", "Poste", "Equipe",""].map((el) => (
+                  {["Action", "Total", "Taux de réussite"].map((el) => (
                     <th
                       key={el}
                       className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -70,16 +67,13 @@ export const PlayerByTeam = () => {
                 </tr>
               </thead>
               <tbody>
-                {joueurs.map(
-                  (joueur) => {
-                    const className = `py-3 px-5 ${
-                      joueur.id === authorsTableData.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
+                {actions.map(
+                  (action) => {
+                    const className = `py-3 px-5 ${"border-b border-blue-gray-50"
                     }`;
 
                     return (
-                      <tr key={joueur.id}>
+                      <tr >
                         <td className={className}>
                           <div className="flex items-center gap-4">
                             <div>
@@ -88,7 +82,7 @@ export const PlayerByTeam = () => {
                                 color="blue-gray"
                                 className="font-semibold"
                               >
-                                {joueur.nom}
+                                {action.type_action}
                               </Typography>
 
                             </div>
@@ -96,28 +90,16 @@ export const PlayerByTeam = () => {
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {joueur.poste}
+                            {action.total_actions}
                           </Typography>
                         </td>
 
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {joueur.equipe.nomEquipe}
+                            {action.taux_reussite}
                           </Typography>
                         </td>
-                        <td className={className}>
-                        <Link
-                          to={`/dashboard/joueurs/action/${joueur.id}`}
-                        >
-                        <Chip
 
-                          variant="gradient"
-                          color={"blue"}
-                          value={"Info"}
-                          className="py-0.5 px-2 text-[11px] font-medium w-fit"
-                        />
-                        </Link>
-                      </td>
                       </tr>
                     );
                   }

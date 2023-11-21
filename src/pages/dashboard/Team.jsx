@@ -107,7 +107,7 @@ export const Team = () => {
 
                       <td className={className}>
                         <Link
-                          to="/dashboard/joueurs"
+                          to={`/dashboard/joueurs/${equipe.id}`}
                         >
                         <Chip
 
